@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="reservationModel.Store" Provider="Npgsql" ProviderManifestToken="12.3" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="reservation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int8" Nullable="false" />
+          <Property Name="check_in" Type="timestamp" Nullable="false" />
+          <Property Name="check_out" Type="timestamp" Nullable="false" />
+          <Property Name="nights" Type="int4" Nullable="false" />
+          <Property Name="client" Type="varchar" MaxLength="8000" Nullable="false" />
+          <Property Name="dollars_rate" Type="numeric" Precision="19" Scale="4" />
+          <Property Name="colons_rate" Type="numeric" Precision="19" Scale="4" />
+          <Property Name="observations" Type="varchar" MaxLength="8000" />
+          <Property Name="contract_type" Type="varchar" MaxLength="8000" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="8000" />
+          <Property Name="password" Type="varchar" MaxLength="8000" />
+        </EntityType>
+        <EntityContainer Name="reservationModelStoreContainer">
+          <EntitySet Name="reservation" EntityType="Self.reservation" Schema="public" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="public" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="reservationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ReservationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Reservations1" EntityType="reservationModel.Reservation" />
+          <EntitySet Name="Users1" EntityType="reservationModel.User" />
+        </EntityContainer>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="check_in" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="check_out" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="nights" Type="Int32" Nullable="false" />
+          <Property Name="client" Type="String" Nullable="false" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <Property Name="dollars_rate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="colons_rate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="observations" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <Property Name="contract_type" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="reservationModelStoreContainer" CdmEntityContainer="ReservationEntities">
+          <EntitySetMapping Name="Reservations1">
+            <EntityTypeMapping TypeName="reservationModel.Reservation">
+              <MappingFragment StoreEntitySet="reservation">
+                <ScalarProperty Name="contract_type" ColumnName="contract_type" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+                <ScalarProperty Name="colons_rate" ColumnName="colons_rate" />
+                <ScalarProperty Name="dollars_rate" ColumnName="dollars_rate" />
+                <ScalarProperty Name="client" ColumnName="client" />
+                <ScalarProperty Name="nights" ColumnName="nights" />
+                <ScalarProperty Name="check_out" ColumnName="check_out" />
+                <ScalarProperty Name="check_in" ColumnName="check_in" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users1">
+            <EntityTypeMapping TypeName="reservationModel.User">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

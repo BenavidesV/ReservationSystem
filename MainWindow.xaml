@@ -1,0 +1,88 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="San Vicente Hideaway" Height="450" Width="800"
+        
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True">
+    <Window.CommandBindings>
+        <CommandBinding Command="New" CanExecute="CommonCommandBinding_CanExecute" />
+        <CommandBinding Command="Save" CanExecute="CommonCommandBinding_CanExecute" />
+        <CommandBinding Command="Cut" CanExecute="CommonCommandBinding_CanExecute" />
+    </Window.CommandBindings>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" />
+                <MenuItem Header="_Open" />
+                <MenuItem Header="_Save" />
+                <Separator />
+                <MenuItem Header="_Exit" />
+            </MenuItem>
+        </Menu>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Command="Cut" ToolTip="Crear reservación">
+
+                    <DockPanel Height="85" Width="85">
+
+                        <Image Source="/component/images/ic_open.png" Width="85" />
+                    </DockPanel>
+                </Button>
+                <Button Command="Cut" ToolTip="Mostrar disponibilidad de habitación.">
+                    <DockPanel Height="85" Width="85">
+                        <Image Source="/component/Images/user.png" Width="85" />
+                    </DockPanel>
+                </Button>
+                <Button Command="Cut" ToolTip="Mostrar todas las reservas.">
+                    <StackPanel Orientation="Horizontal">
+                        <DockPanel Height="85" Width="85">
+                            <Image Source="/component/Images/calendar.png" Width="100" />
+                        </DockPanel>
+                    </StackPanel>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <Viewbox>
+            <Calendar />
+        </Viewbox>
+        <Grid Margin="10">
+            <DataGrid Name="dgUsers" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Birthday" Binding="{Binding Birthday}" />
+                </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <DockPanel Background="GhostWhite">
+                            <Image DockPanel.Dock="Left" Source="{Binding ImageUrl}" Height="64" Margin="10" />
+                            <Grid Margin="0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="ID: " FontWeight="Bold" />
+                                <TextBlock Text="{Binding Id}" Grid.Column="1" />
+                                <TextBlock Text="Name: " FontWeight="Bold" Grid.Row="1" />
+                                <TextBlock Text="{Binding Name}" Grid.Column="1" Grid.Row="1" />
+                                <TextBlock Text="Birthday: " FontWeight="Bold" Grid.Row="2" />
+                                <TextBlock Text="{Binding Birthday, StringFormat=d}" Grid.Column="1" Grid.Row="2" />
+
+                            </Grid>
+                        </DockPanel>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
+</Window>

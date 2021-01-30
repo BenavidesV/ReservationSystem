@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="component\Images\calendar.png" />
+    <None Remove="component\Images\date.jfif" />
+    <None Remove="component\Images\ic_open.png" />
+    <None Remove="component\Images\user.png" />
+    <None Remove="ORM\ReservationEDM.Context.tt" />
+    <None Remove="ORM\ReservationEDM.tt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ORM\ReservationEDM.Context.tt">
+      <DependentUpon>ReservationEDM.edmx</DependentUpon>
+      <LastGenOutput>ReservationEDM.Context.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </Content>
+    <Content Include="ORM\ReservationEDM.tt">
+      <DependentUpon>ReservationEDM.edmx</DependentUpon>
+      <LastGenOutput>ReservationEDM.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="ModernWpfUI" Version="0.9.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="component\Images\calendar.png" />
+    <Resource Include="component\Images\date.jfif" />
+    <Resource Include="component\Images\ic_open.png" />
+    <Resource Include="component\Images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ORM\ReservationEDM.Context.cs">
+      <DependentUpon>ReservationEDM.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="ORM\ReservationEDM.cs">
+      <DependentUpon>ReservationEDM.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="ORM\ReservationEDM.Designer.cs">
+      <DependentUpon>ReservationEDM.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ORM\ReservationEDM.edmx.diagram">
+      <DependentUpon>ReservationEDM.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+
+</Project>
